@@ -7,7 +7,7 @@
 
 Make sure the Android device is connected and USB Debugging is enabled.
 
-## Steps to Integrate Unity Framework  in Project for Android App using kotlin:
+## Steps to Integrate Unity .aar file for Android App using kotlin:
 
 1. Create libs folder `/app/libs` Extract and copy the `unityLibrary.aar` file into the `libs` folder.
 
