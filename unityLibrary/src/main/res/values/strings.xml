@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">UnityKotlinDemo</string>
-    <string name="unity_player_activity_name">Unity Player</string>
-    <string name="game_view_content_description">Game view</string>
-</resources>

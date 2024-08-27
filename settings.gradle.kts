@@ -9,6 +9,11 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        flatDir {
+            dirs("libs")
+        }
+
+
     }
 }
 dependencyResolutionManagement {
@@ -19,5 +24,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "UnityKotlinDemo2"
-include(":app", ":unityLibrary")
+rootProject.name = "UnityKotlinDemo"
+include(":app")

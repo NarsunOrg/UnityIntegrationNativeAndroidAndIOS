@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.demo.unitykotlindemo2"
+    namespace = "com.demo.unitykotlin"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.demo.unitykotlindemo2"
-        minSdk = 22
+        applicationId = "com.demo.unitykotlin"
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -17,6 +17,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+        ndk {
+            abiFilters.add("armeabi-v7a")
+            abiFilters.add("arm64-v8a")
         }
     }
 
@@ -50,7 +54,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -66,5 +69,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(project(":unityLibrary"))
+    implementation(files("libs/unityLibrary.aar"))
+
 }
