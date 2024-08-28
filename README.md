@@ -11,7 +11,7 @@ Make sure the Android device is connected and USB Debugging is enabled.
    Let’s name both the project and the workspace SwiftUnity.
    Important: Make sure you select Storyboard as the Interface, these steps are needed even if you want to use SwiftUI as they are essential to get the Unity integration working.
 
-![Alt text](https://github.com/NarsunOrg/UnityIntegrationNativeAndroidAndIOS/blob/ios_1.png).
+![Alt text](https://github.com/NarsunOrg/UnityIntegrationNativeAndroidAndIOS/blob/main/blob/ios_1.png).
 
 ```dart
 import 'package:flutter/material.dart';
