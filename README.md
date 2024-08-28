@@ -3,7 +3,7 @@
 - \*\*Version 15.3 (15E204a)
 - **Unity** 2022.3.16f1
 
-Make sure the Android device is connected and USB Debugging is enabled.
+Make sure the iPhone real device is connected and USB Debugging is enabled.
 
 ## Steps to Integrate Unity freamework in Project for iOS app:
 
