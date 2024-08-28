@@ -30,7 +30,7 @@ Now once you are done with above step open the Unity project, go to File → Bui
 
 ![Alt text](https://github.com/NarsunOrg/UnityIntegrationNativeAndroidAndIOS/blob/main/blob/ios_2.png).
 
-Time to export our Unity project as an iOS project. You don’t need to change any of the settings, just click Build. You will export the Unity project in a folder called UnityBuild. So now your folder structure should look like this
+Time to export our Unity project as an iOS project. You don’t need to change any of the settings, just click Build. You will export the Unity project in a folder called UnityExportIOS. So now your folder structure should look like this
 
 ![Alt text](https://github.com/NarsunOrg/UnityIntegrationNativeAndroidAndIOS/blob/main/blob/ios_3.png).
 
