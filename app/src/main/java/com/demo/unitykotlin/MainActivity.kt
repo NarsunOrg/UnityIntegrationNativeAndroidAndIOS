@@ -2,29 +2,32 @@ package com.demo.unitykotlin
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.demo.unitykotlin.ui.theme.UnityKotlinDemoTheme
-
-import androidx.compose.material3.Button
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
+import com.demo.unitykotlin.ui.theme.UnityKotlinDemoTheme
+import com.unity3d.player.IUnityMessageListener
+import com.unity3d.player.UnityPlayer
 import com.unity3d.player.UnityPlayerActivity
 
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), IUnityMessageListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        UnityPlayerActivity.setiUnityMessageListener(this)
         enableEdgeToEdge()
         setContent {
             UnityKotlinDemoTheme {
@@ -36,7 +39,7 @@ class MainActivity : ComponentActivity() {
                         contentAlignment = Alignment.Center
                     ) {
                         Button(
-                            onClick = { callGamePlay() }
+                            onClick = { callUnityPlayerActivity() }
                         ) {
                             Text(text = "Start UnityPlayer")
                         }
@@ -47,11 +50,22 @@ class MainActivity : ComponentActivity() {
 
     }
 
-    private fun callGamePlay(){
+    private fun callUnityPlayerActivity(){
         val intent = Intent(this, UnityPlayerActivity::class.java)
         startActivity(intent);
     }
 
+    override fun onUnityMessageReceived(route: String?) {
+        Log.e("abc:", "MainActivity onUnityMessageReceived: $route")
+        sendMessageToUnity(route)
+    }
+}
+
+fun sendMessageToUnity(route: String?) {
+    Log.e("abc:", "sendMessageToUnity: ", )
+    if(route == AndroidRouts.AUTH_TOKEN){
+        UnityPlayer.UnitySendMessage("AndroidNativeBridge", "ReceiveMessageFromAndroid", "Auth token message")
+    }
 }
 
 @Composable
@@ -67,5 +81,12 @@ fun Greeting(name: String) {
 fun GreetingPreview() {
     UnityKotlinDemoTheme {
         Greeting("Android")
+    }
+}
+class AndroidRouts {
+    companion object {
+        const val AUTH_TOKEN = "AUTH_TOKEN"
+        const val HOME_PAGE = "HOME_PAGE"
+        const val UNITY_INITIALIZED = "UNITY_INITIALIZED"
     }
 }

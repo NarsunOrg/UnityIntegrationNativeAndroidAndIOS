@@ -3,7 +3,6 @@
 ## Prerequisites:
 - **Android Studio Koala | 2024.1.1 Patch 2** 
 - **Kotlin** 1.9.0
-- **Unity** 2022.3.21f1
 
 Make sure the Android device is connected and USB Debugging is enabled.
 
@@ -18,19 +17,26 @@ dependencies {
     implementation(files("libs/unityLibrary.aar"))
 }
 ```
-3. In `/app/build.gradle`, ensure your `minSdkVersion` is at least 22:
+3. In `/app/build.gradle`, ensure your `minSdkVersion` at least 22 and aaptOptions is addded
 
 ```kotlin
+android {
   defaultConfig {
-    applicationId = "com.demo.unitykotlindemo"
-    minSdk = 22
-    targetSdk = 34
-    versionCode = 1
-    versionName = "1.0"
+      applicationId = "com.demo.unitykotlindemo"
+      minSdk = 22
+      targetSdk = 34
+      versionCode = 1
+      versionName = "1.0"
 
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    vectorDrawables {
-        useSupportLibrary = true
+      testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+      vectorDrawables {
+          useSupportLibrary = true
+      }
+  }
+
+    aaptOptions {
+        noCompress("unity3d", "ress", "resource", "obb")
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
     }
 }
 ```
@@ -66,15 +72,21 @@ pluginManagement {
 
 ```kotlin
 
+import com.unity3d.player.IUnityMessageListener
+import com.unity3d.player.UnityPlayer
 import com.unity3d.player.UnityPlayerActivity
 
 ```
 ```kotlin
+// IUnityMessageListener interface used to share messages between UnityPlayerActivity to MainActivity
+class MainActivity : ComponentActivity(), IUnityMessageListener {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        UnityPlayerActivity.setiUnityMessageListener(this)
         enableEdgeToEdge()
         setContent {
-            UnityKotlinDemo2Theme {
+            UnityKotlinDemoTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(
                         modifier = Modifier
@@ -83,7 +95,7 @@ import com.unity3d.player.UnityPlayerActivity
                         contentAlignment = Alignment.Center
                     ) {
                         Button(
-                            onClick = { callGamePlay() }
+                            onClick = { callUnityPlayerActivity() }
                         ) {
                             Text(text = "Start UnityPlayer")
                         }
@@ -91,13 +103,33 @@ import com.unity3d.player.UnityPlayerActivity
                 }
             }
         }
+
     }
-
-
-    private fun callGamePlay() {
+    //star Unity Player
+    private fun callUnityPlayerActivity(){
         val intent = Intent(this, UnityPlayerActivity::class.java)
         startActivity(intent);
     }
+    // Message received from unity
+    override fun onUnityMessageReceived(route: String?) {
+        Log.e("abc:", "MainActivity onUnityMessageReceived: $route")
+        sendMessageToUnity(route)
+    }
+}
+// send message to Unity
+fun sendMessageToUnity(route: String?) {
+    Log.e("abc:", "MainActivity sendMessageToUnity: ", )
+    if(route == AndroidRouts.AUTH_TOKEN){
+        UnityPlayer.UnitySendMessage("AndroidNativeBridge", "ReceiveMessageFromAndroid", "Paste auth token here...")
+    }
+}
+class AndroidRouts {
+    companion object {
+        const val AUTH_TOKEN = "AUTH_TOKEN"
+        const val HOME_PAGE = "HOME_PAGE"
+        const val UNITY_INITIALIZED = "UNITY_INITIALIZED"
+    }
+}
 ```
 7. Connect your Android device and run .
 
