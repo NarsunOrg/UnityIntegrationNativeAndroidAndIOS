@@ -23,6 +23,7 @@ import com.unity3d.player.UnityPlayer
 import com.unity3d.player.UnityPlayerActivity
 
 
+// IUnityMessageListener interface used to share messages between UnityPlayerActivity to MainActivity
 class MainActivity : ComponentActivity(), IUnityMessageListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,24 +50,33 @@ class MainActivity : ComponentActivity(), IUnityMessageListener {
         }
 
     }
-
+    //star Unity Player
     private fun callUnityPlayerActivity(){
         val intent = Intent(this, UnityPlayerActivity::class.java)
         startActivity(intent);
     }
-
+    // Message received from unity
     override fun onUnityMessageReceived(route: String?) {
         Log.e("abc:", "MainActivity onUnityMessageReceived: $route")
         sendMessageToUnity(route)
     }
 }
-
+// send message to Unity
 fun sendMessageToUnity(route: String?) {
-    Log.e("abc:", "sendMessageToUnity: ", )
+    Log.e("abc:", "MainActivity sendMessageToUnity: ", )
     if(route == AndroidRouts.AUTH_TOKEN){
-        UnityPlayer.UnitySendMessage("AndroidNativeBridge", "ReceiveMessageFromAndroid", "Auth token message")
+        UnityPlayer.UnitySendMessage("AndroidNativeBridge", "ReceiveMessageFromAndroid", "Paste auth token here...")
     }
 }
+class AndroidRouts {
+    companion object {
+        const val AUTH_TOKEN = "AUTH_TOKEN"
+        const val HOME_PAGE = "HOME_PAGE"
+        const val UNITY_INITIALIZED = "UNITY_INITIALIZED"
+    }
+}
+
+
 
 @Composable
 fun Greeting(name: String) {
@@ -83,10 +93,4 @@ fun GreetingPreview() {
         Greeting("Android")
     }
 }
-class AndroidRouts {
-    companion object {
-        const val AUTH_TOKEN = "AUTH_TOKEN"
-        const val HOME_PAGE = "HOME_PAGE"
-        const val UNITY_INITIALIZED = "UNITY_INITIALIZED"
-    }
-}
+

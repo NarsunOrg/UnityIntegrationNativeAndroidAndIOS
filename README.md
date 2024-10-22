@@ -83,6 +83,7 @@ class MainActivity : ComponentActivity(), IUnityMessageListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+       // initialize interface
         UnityPlayerActivity.setiUnityMessageListener(this)
         enableEdgeToEdge()
         setContent {
@@ -134,5 +135,5 @@ class AndroidRouts {
 7. Connect your Android device and run .
 
 ### Video link For Step by Step Integration:
-https://drive.google.com/file/d/1n-GDNSdlRpUclPxvpq3cwa4_cJg-XcK_/view?usp=sharing
+https://drive.google.com/file/d/1GhtkqbqdxgOb5heTPRBjbjAUsqgMLk8o/view?usp=sharing
 

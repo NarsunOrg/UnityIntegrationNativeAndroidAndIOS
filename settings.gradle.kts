@@ -13,7 +13,6 @@ pluginManagement {
             dirs("libs")
         }
 
-
     }
 }
 dependencyResolutionManagement {

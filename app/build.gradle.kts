@@ -55,6 +55,7 @@ android {
         noCompress("unity3d", "ress", "resource", "obb")
         ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
     }
+
 }
 
 dependencies {
@@ -74,5 +75,4 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(files("libs/unityLibrary.aar"))
-
 }
