@@ -8,13 +8,13 @@ Make sure the Android device is connected and USB Debugging is enabled.
 
 ## Steps to Integrate Unity .aar file for Android App using kotlin:
 
-1. Create libs folder `/app/libs` Extract and copy the `unityLibrary.aar` file into the `libs` folder.
+1. Create libs folder `/app/libs` Extract and copy the `SaudiMetaverseUnity.aar` file into the `libs` folder.
 
 2. Add the following dependencies to your app level `build.gradle.kts` file `/app/build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation(files("libs/unityLibrary.aar"))
+    implementation(files("libs/SaudiMetaverseUnity.aar"))
 }
 ```
 3. In `/app/build.gradle`, ensure your `minSdkVersion` at least 22 and aaptOptions is addded

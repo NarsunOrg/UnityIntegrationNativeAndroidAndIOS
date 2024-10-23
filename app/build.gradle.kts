@@ -74,5 +74,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(files("libs/unityLibrary.aar"))
+    implementation(files("libs/SaudiMetaverseUnity.aar"))
 }
